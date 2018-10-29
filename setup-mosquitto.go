@@ -62,7 +62,7 @@ func users() error {
 		return fmt.Errorf("failed to create password file: %s", err)
 	}
 	for _, env := range os.Environ() {
-		if !strings.HasPrefix(env, "MQ_USER_NAME_") {
+		if !strings.HasPrefix(env, "USER_NAME_") {
 			continue
 		}
 
@@ -72,8 +72,8 @@ func users() error {
 		}
 		name := strings.Join(parts[1:], "=")
 
-		nr := strings.TrimPrefix(env, "MQ_USER_NAME_")
-		passwordEnvKey := "MQ_USER_PASSWORD_" + nr
+		nr := strings.TrimPrefix(env, "USER_NAME_")
+		passwordEnvKey := "USER_PASSWORD_" + nr
 		password := os.Getenv(passwordEnvKey)
 		if password == "" {
 			return fmt.Errorf("no password provided for user %s", name)
