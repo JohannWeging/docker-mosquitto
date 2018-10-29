@@ -1,4 +1,4 @@
-
+[![Build Status](https://ci.sysexit.com/api/badges/JohannWeging/docker-mosquitto/status.svg)](https://ci.sysexit.com/JohannWeging/docker-mosquitto) [![Docker Hub](https://img.shields.io/badge/docker-container-blue.svg?longCache=true&style=flat-square)](https://hub.docker.com/r/johannweging/mosquitto) [![GitHub](https://img.shields.io/badge/github-repo-blue.svg?longCache=true&style=flat-square)](https://github.com/JohannWeging/docker-mosquitto)
 # Mosquitto Docker Container
 Mosquitto MQTT Broker Docker Container (amd54, arm32v6)
 
