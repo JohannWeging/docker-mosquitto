@@ -5,13 +5,13 @@ matrix:
 pipeline:
   docker_amd64:
     image: plugins/docker
-    repo: johannweging/base-alpine
+    repo: johannweging/mosquitto
     tags: ${VERSION}
     secrets: [docker_username, docker_password]
 
   docker_arm32v6:
     image: plugins/docker
-    repo: johannweging/base-alpine
+    repo: johannweging/mosquitto
     tags: ${VERSION}-arm32v6
     build_args:
       - ARCH_SUFFIX=-arm32v6
