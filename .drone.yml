@@ -1,0 +1,18 @@
+matrix:
+  VERSION:
+    - latest
+
+pipeline:
+  docker_amd64:
+    image: plugins/docker
+    repo: johannweging/base-alpine
+    tags: ${VERSION}
+    secrets: [docker_username, docker_password]
+
+  docker_arm32v6:
+    image: plugins/docker
+    repo: johannweging/base-alpine
+    tags: ${VERSION}-arm32v6
+    build_args:
+      - ARCH_SUFFIX=-arm32v6
+    secrets: [docker_username, docker_password]
