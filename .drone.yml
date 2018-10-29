@@ -15,4 +15,5 @@ pipeline:
     tags: ${VERSION}-arm32v6
     build_args:
       - ARCH_SUFFIX=-arm32v6
+      - GOARCH=armhf
     secrets: [docker_username, docker_password]
