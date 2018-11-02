@@ -1,3 +1,5 @@
+ARG ARCH_SUFFIX=""
+
 FROM golang:alpine AS builder
 ARG GOARCH=amd64
 ARG GOARM=6
@@ -8,7 +10,6 @@ WORKDIR /go/src/github.com/JohannWeging/setup-mosquitto
 RUN set -x \
  && GOARCH=${GOARCH} GOARM=${GOARM} go build -o setup-mosquitto
 
-ARG ARCH_SUFFIX=""
 FROM johannweging/base-alpine:latest${ARCH_SUFFIX}
 
 ENV CONFIG_FILE=/etc/mosquitto/mosquitto.conf MQ_PASSWORD_FILE=/etc/mosquitto/pwfile \
