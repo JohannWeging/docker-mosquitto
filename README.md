@@ -26,12 +26,6 @@ Custom user password file:
 docker run -v data:/data -e MQ_ALLOW_ANONYMOUS=false -e MQ_PASSWORD_FILE=/data/pwfile johannweging/mosquitto
 ```
 
-Custom config file, if you want to mount one:
-```
-# IMPORTANT ENV config keys are simply appended to the file not overwritten!
-docker run -v conf:/conf -e CONFIG_FILE=/conf/conf.conf johannweging/mosquitto
-```
-
 ## Architectures
 The image supports `amd64` and `arm32v6`.
 ```

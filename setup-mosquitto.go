@@ -24,7 +24,7 @@ func run() error {
 
 func writeConfig() error {
 	confFilePath := os.Getenv("CONFIG_FILE")
-	conf, err := os.OpenFile(confFilePath, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0640)
+	conf, err := os.Create(confFilePath)
 	if err != nil {
 		return fmt.Errorf("failed to create %s: %s\n", confFilePath, err)
 	}
