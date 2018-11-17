@@ -1,20 +1,64 @@
-matrix:
-  VERSION:
-    - latest
+---
+kind: pipeline
+name: build amd64
 
-pipeline:
-  docker_amd64:
-    image: plugins/docker
-    repo: johannweging/mosquitto
-    tags: ${VERSION}
-    secrets: [docker_username, docker_password]
+platform:
+  os: linux
+  arch: amd64
 
-  docker_arm32v6:
-    image: plugins/docker
-    repo: johannweging/mosquitto
-    tags: ${VERSION}-arm32v6
+steps:
+- name: version latest
+  image: plugins/docker
+  settings:
     build_args:
-      - ARCH_SUFFIX=-arm32v6
-      - GOARCH=arm
-      - GOARM=6
-    secrets: [docker_username, docker_password]
+    - ALPINE_VERSION=latest
+    dockerfile: Dockerfile
+    password:
+      from_secret: docker_password
+    repo: johannweging/mosquitto
+    tags: latest
+    username:
+      from_secret: docker_username
+
+trigger:
+  branch:
+  - master
+
+---
+kind: pipeline
+name: build arm32v6
+
+platform:
+  os: linux
+  arch: amd64
+
+steps:
+- name: version latest-arm32v6
+  image: plugins/docker
+  settings:
+    build_args:
+    - ALPINE_VERSION=latest-arm32v6
+    dockerfile: Dockerfile
+    password:
+      from_secret: docker_password
+    repo: johannweging/mosquitto
+    tags: latest-arm32v6
+    username:
+      from_secret: docker_username
+
+trigger:
+  branch:
+  - master
+
+---
+kind: secret
+type: general
+external_data:
+  docker_password:
+    path: secret/deployment/docker
+    name: password
+  docker_username:
+    path: secret/deployment/docker
+    name: username
+
+...
