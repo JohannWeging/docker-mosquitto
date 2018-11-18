@@ -1,4 +1,4 @@
-local step(tag) = {
+local step(arch, tag) = {
   name: 'version ' + tag,
   image: 'plugins/docker',
   settings: {
@@ -7,17 +7,19 @@ local step(tag) = {
     dockerfile: 'Dockerfile',
     build_args: [
       'ALPINE_VERSION=' + tag,
+      'GOARCH=' + arch,
+      'GOARM=6',
     ],
     username: { from_secret: 'docker_username' },
     password: { from_secret: 'docker_password' },
   },
 };
 
-local pipeline(name, tag) = {
+local pipeline(name, arch, tag) = {
   kind: 'pipeline',
   name: name,
   steps: [
-    step(tag),
+    step(arch, tag),
   ],
   trigger: {
     branch: ['master'],
@@ -39,7 +41,7 @@ local secret = {
 };
 
 [
-  pipeline('build amd64', 'latest'),
-  pipeline('build arm32v6', 'latest-arm32v6'),
+  pipeline('build amd64', 'amd64', 'latest'),
+  pipeline('build arm32v6', 'arm', 'latest-arm32v6'),
   secret,
 ]

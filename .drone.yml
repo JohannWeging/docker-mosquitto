@@ -12,6 +12,8 @@ steps:
   settings:
     build_args:
     - ALPINE_VERSION=latest
+    - GOARCH=amd64
+    - GOARM=6
     dockerfile: Dockerfile
     password:
       from_secret: docker_password
@@ -38,6 +40,8 @@ steps:
   settings:
     build_args:
     - ALPINE_VERSION=latest-arm32v6
+    - GOARCH=arm
+    - GOARM=6
     dockerfile: Dockerfile
     password:
       from_secret: docker_password
