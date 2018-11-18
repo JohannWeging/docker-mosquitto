@@ -24,5 +24,5 @@ RUN set -x \
 
 EXPOSE 1883
 
-ENTRYPOINT ["/usr/bin/dumb-init", "--rewrite", "15:2" "--"]
+ENTRYPOINT ["/usr/bin/dumb-init", "--rewrite", "15:2", "--"]
 CMD ["/run.sh"]
